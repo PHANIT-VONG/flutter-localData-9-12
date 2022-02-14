@@ -58,18 +58,18 @@ class _DetailPeopleState extends State<DetailPeople> {
           child: Wrap(
             children: <Widget>[
               ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Photo Library'),
-                onTap: () {
-                  onImagePressed(ImageSource.gallery);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
                 onTap: () {
                   onImagePressed(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Photo Library'),
+                onTap: () {
+                  onImagePressed(ImageSource.gallery);
                   Navigator.of(context).pop();
                 },
               ),
