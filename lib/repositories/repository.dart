@@ -12,12 +12,12 @@ class Repository {
   }
   static Database? _database;
   Future<Database?> get database async {
-    //------------- Restart Database -----------
+    // Restart Database ==================================
     // Directory documentsDirectory = await getApplicationDocumentsDirectory();
     // String path = join(documentsDirectory.path, 'db_name');
     // await deleteDatabase(path);
-    // print('Here');
-    //----------------------------------
+    // print('Database Restarted');
+    //==========================
 
     if (_database != null) {
       return _database;
@@ -29,8 +29,8 @@ class Repository {
   insertPeople(table, PeopleModel data) async {
     var _con = await database;
     return await _con!.rawInsert(
-      'INSERT INTO tbPeople(name, gender,address) VALUES(?, ?, ?)',
-      [data.name, data.gender, data.address],
+      'INSERT INTO tbPeople(name, gender,address,photo) VALUES(?, ?, ?, ?)',
+      [data.name, data.gender, data.address, data.photo],
     );
   }
 

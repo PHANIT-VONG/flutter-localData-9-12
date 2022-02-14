@@ -3,12 +3,14 @@ class PeopleModel {
   final String name;
   final String gender;
   final String address;
+  final String photo;
 
   PeopleModel({
     required this.id,
     required this.name,
     required this.gender,
     required this.address,
+    required this.photo,
   });
 
   factory PeopleModel.fromJson(Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class PeopleModel {
       name: json['name'] as String,
       gender: json['gender'] as String,
       address: json['address'] as String,
+      photo: json['photo'] as String,
     );
   }
   Map<String, dynamic> toJson() {
@@ -25,6 +28,7 @@ class PeopleModel {
       'name': name,
       'gender': gender,
       'address': address,
+      'photo': photo,
     };
   }
 }

@@ -13,7 +13,7 @@ class ConnectionDb {
 
   _onCreateDatabase(Database database, int version) async {
     await database.execute(
-      'CREATE TABLE tbPeople(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, gender TEXT,address TEXT)',
+      'CREATE TABLE tbPeople(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT, gender TEXT,address TEXT,photo TEXT)',
     );
   }
 }

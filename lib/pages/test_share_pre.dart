@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class TestSharePre extends StatefulWidget {
+  const TestSharePre({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TestSharePre> createState() => _TestSharePreState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TestSharePreState extends State<TestSharePre> {
   final key = 'key';
   double? value = 0.0;
 
@@ -20,9 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   _readData() async {
     final sp = await SharedPreferences.getInstance();
-    setState(() {
-      value = sp.getDouble(key);
-    });
+    value = sp.getDouble(key);
     print('Data Read Success');
   }
 
@@ -50,8 +48,8 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                _saveData();
                 setState(() {
+                  _saveData();
                   _readData();
                 });
               },

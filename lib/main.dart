@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_data/pages/sqflite_page.dart';
-import 'pages/home_page.dart';
+import 'package:flutter_local_data/pages/show_people.dart';
+import 'package:flutter_local_data/pages/test_share_pre.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const HomePage(),
-      home: SqflitePage(),
+      //home: const TestSharePre(),
+      home: const ShowPeople(),
     );
   }
 }
