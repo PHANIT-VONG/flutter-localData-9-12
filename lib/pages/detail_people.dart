@@ -32,12 +32,12 @@ class _DetailPeopleState extends State<DetailPeople> {
   }
 
   final ImagePicker _picker = ImagePicker();
-  void _onImagePressed(ImageSource source) async {
+  void onImagePressed(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(
         source: source,
-        maxWidth: double.infinity,
-        maxHeight: double.infinity,
+        maxWidth: double.maxFinite,
+        maxHeight: double.maxFinite,
         imageQuality: 100,
       );
       setState(() {
@@ -50,7 +50,7 @@ class _DetailPeopleState extends State<DetailPeople> {
     }
   }
 
-  _showPicker(context) {
+  showPicker(context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -61,7 +61,7 @@ class _DetailPeopleState extends State<DetailPeople> {
                 leading: const Icon(Icons.photo_library),
                 title: const Text('Photo Library'),
                 onTap: () {
-                  _onImagePressed(ImageSource.gallery);
+                  onImagePressed(ImageSource.gallery);
                   Navigator.of(context).pop();
                 },
               ),
@@ -69,7 +69,7 @@ class _DetailPeopleState extends State<DetailPeople> {
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
                 onTap: () {
-                  _onImagePressed(ImageSource.camera);
+                  onImagePressed(ImageSource.camera);
                   Navigator.of(context).pop();
                 },
               ),
@@ -80,21 +80,16 @@ class _DetailPeopleState extends State<DetailPeople> {
     );
   }
 
-  GestureDetector _buildImage(BuildContext context) {
+  GestureDetector buildImage(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        _showPicker(context);
-      },
+      onTap: () => showPicker(context),
       child: Container(
         height: 130.0,
         width: 130.0,
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 221, 216, 216),
           shape: BoxShape.circle,
-          border: Border.all(
-            color: Colors.blue,
-            width: 3.0,
-          ),
+          border: Border.all(color: Colors.blue, width: 3.0),
           image: _imageFileList != null || _imageString != null
               ? DecorationImage(
                   fit: BoxFit.cover,
@@ -164,7 +159,7 @@ class _DetailPeopleState extends State<DetailPeople> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildImage(context),
+                buildImage(context),
                 const SizedBox(height: 20.0),
                 TextField(
                   style: AppStyle.textSize,

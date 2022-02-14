@@ -26,36 +26,21 @@ class _AddPeopleState extends State<AddPeople> {
   }
 
   final ImagePicker _picker = ImagePicker();
-  void _onImagePressed(ImageSource source, {bool isMultiImage = false}) async {
-    if (isMultiImage) {
-      try {
-        final pickedFileList = await _picker.pickMultiImage(
-          maxWidth: double.infinity,
-          maxHeight: double.infinity,
-          imageQuality: 100,
-        );
-        setState(() {
-          _imageFileList = pickedFileList;
-        });
-      } catch (e) {
-        print('Image Error : $e');
-      }
-    } else {
-      try {
-        final pickedFile = await _picker.pickImage(
-          source: source,
-          maxWidth: double.infinity,
-          maxHeight: double.infinity,
-          imageQuality: 100,
-        );
-        setState(() {
-          _imageFile = pickedFile;
-          List<int> imageBytes = File(pickedFile!.path).readAsBytesSync();
-          _imageString = base64Encode(imageBytes);
-        });
-      } catch (e) {
-        print('Image Error : $e');
-      }
+  void _onImagePressed(ImageSource source) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        maxWidth: double.maxFinite,
+        maxHeight: double.maxFinite,
+        imageQuality: 100,
+      );
+      setState(() {
+        _imageFile = pickedFile;
+        List<int> imageBytes = File(pickedFile!.path).readAsBytesSync();
+        _imageString = base64Encode(imageBytes);
+      });
+    } catch (e) {
+      print('Image Error : $e');
     }
   }
 
@@ -67,18 +52,18 @@ class _AddPeopleState extends State<AddPeople> {
           child: Wrap(
             children: <Widget>[
               ListTile(
-                leading: const Icon(Icons.photo_library),
-                title: const Text('Photo Library'),
-                onTap: () {
-                  _onImagePressed(ImageSource.gallery);
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
                 leading: const Icon(Icons.photo_camera),
                 title: const Text('Camera'),
                 onTap: () {
                   _onImagePressed(ImageSource.camera);
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Photo Library'),
+                onTap: () {
+                  _onImagePressed(ImageSource.gallery);
                   Navigator.of(context).pop();
                 },
               ),
@@ -91,9 +76,7 @@ class _AddPeopleState extends State<AddPeople> {
 
   GestureDetector _buildImage(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        _showPicker(context);
-      },
+      onTap: () => _showPicker(context),
       child: Container(
         height: 130.0,
         width: 130.0,
